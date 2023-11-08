@@ -8,8 +8,5 @@ public class GoitApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(GoitApplication.class, args);
-
-        new Test().create();
     }
-
 }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body {
+            background-color: #b0bdaf;
+        }
+        table {
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+            width: 33.33%;
+        }
+        th.actions-column {
+            width: 10%;
+        }
+
+        tr:nth-child(even) {
+            background-color: #c5c5c5;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .button-container form {
+            margin: 0;
+        }
+
+        .button-container button {
+            background-color: #008CBA;
+            /*color: #fff;*/
+            color: #cfec14;
+            padding: 10px 20px;
+            border: 2px solid #000;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>List of Notes</h1>
+<form method="post" th:action="@{'/note/create'}" th:object="${note}">
+    <button type="submit" style="background-color: #cfec14; color: #000; padding: 10px 20px; border: 1px solid #000; cursor: pointer;margin-bottom: 10px;">Create a note</button>
+</form>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th class="actions-column">Actions</th>
+    </tr>
+    <tr th:each="note : ${noteList}">
+
+        <td th:text="${note.title}"></td>
+        <td th:text="${note.content}"></td>
+        <td>
+            <div class="button-container">
+                <form method="get" action="/note/edit">
+                    <button type="submit">EDIT</button>
+                    <input type="hidden" name="id" th:value="${note.id}">
+                </form>
+                <form method="post" th:action="@{'/note/delete/' + ${note.id}}">
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <button type="submit" style="background-color: #ba0000; color: #cfec14; padding: 10px 20px; border: 2px solid #000; cursor: pointer;">DELETE</button>
+                </form>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

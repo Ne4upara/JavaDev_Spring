@@ -26,7 +26,7 @@ public class NoteCrud {
 
     public Note getNoteById(Long id) {
        try{
-           myException(id);
+           notFoundIdException(id);
         }catch (NotFoundIdException e){
             System.err.println(e.getMessage());
         }
@@ -35,7 +35,7 @@ public class NoteCrud {
 
     public void deleteById(Long id) {
         try {
-            myException(id);
+            notFoundIdException(id);
             notes.remove(id);
         } catch (NotFoundIdException e) {
             System.err.println(e.getMessage());
@@ -44,7 +44,7 @@ public class NoteCrud {
 
     public void update(Note note) {
         try {
-            myException(note.getId());
+            notFoundIdException(note.getId());
             notes.put(note.getId(), note);
         } catch (NotFoundIdException e) {
             System.err.println(e.getMessage());
@@ -55,7 +55,7 @@ public class NoteCrud {
         return new ArrayList<>(notes.values());
     }
 
-    public void myException(Long id) {
+    public void notFoundIdException(Long id) {
         if (!notes.containsKey(id)) {
             throw new NotFoundIdException(id);
         }

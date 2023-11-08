@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body {
+            background-color: #b0bdaf;
+        }
+    </style>
+</head>
+<body>
+<h1 th:text = "${titleMesage}"></h1>
+
+<form method="post" action="/note/edit">
+    <label for="title" style="font-size: 16px;">Title:</label>
+    <input type="text" id="title" name="title" th:value="${noteById.title}" required>
+
+    <label for="content" style="font-size: 16px;">Content:</label>
+    <input type="text" id="content" name="content" th:value="${noteById.content}" required>
+
+    <input type="hidden" name="id" th:value="${noteById.id}">
+
+    <button type="submit" style="background-color: #00ba47; color: #fff; padding: 10px 20px;
+     border: none; cursor: pointer;">Save</button>
+</form>
+<form method="post" th:action="@{'/note/delete/' + ${noteById.id}}">
+    <input type="submit" value="Back to List" style="background-color: #cfec14; color: #020202; padding: 10px 20px; border: 1px solid #000; cursor: pointer;">
+</form>
+
+</body>
+</html>
