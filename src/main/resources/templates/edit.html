@@ -20,10 +20,12 @@
     <input type="hidden" name="id" th:value="${noteById.id}">
 
     <button type="submit" style="background-color: #00ba47; color: #fff; padding: 10px 20px;
-     border: none; cursor: pointer;">Save</button>
+     border: none; cursor: pointer;"
+            data-toggle="tooltip" data-placement="top" title="Сохранить запись">Save</button>
 </form>
 <form method="post" th:action="@{'/note/delete/' + ${noteById.id}}">
-    <input type="submit" value="Back to List" style="background-color: #cfec14; color: #020202; padding: 10px 20px; border: 1px solid #000; cursor: pointer;">
+    <input type="submit" value="Back to List" style="background-color: #cfec14; color: #020202; padding: 10px 20px; border: 1px solid #000; cursor: pointer;"
+           data-toggle="tooltip" data-placement="top" title="Вернутса назад к списку">
 </form>
 
 </body>
