@@ -1,5 +1,6 @@
 package sergey.goit.service;
 
+
 import org.springframework.stereotype.Service;
 import sergey.goit.entities.Note;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+
 public class NoteCrud {
 
     private Long count = 0L;
