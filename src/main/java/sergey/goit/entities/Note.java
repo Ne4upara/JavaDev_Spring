@@ -8,6 +8,7 @@ public class Note {
 
     @Id
     @SequenceGenerator(name = "noteidgenerator", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "noteidgenerator")
     @Column(name = "id")
     private Long id;
 

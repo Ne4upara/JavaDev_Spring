@@ -8,7 +8,7 @@
     </style>
 </head>
 <body>
-<h1 th:text = "${titleMesage}"></h1>
+<h1 th:text="${titleMesage}"></h1>
 
 <form method="post" action="/note/edit">
     <label for="title" style="font-size: 16px;">Title:</label>
@@ -21,10 +21,12 @@
 
     <button type="submit" style="background-color: #00ba47; color: #fff; padding: 10px 20px;
      border: none; cursor: pointer;"
-            data-toggle="tooltip" data-placement="top" title="Сохранить запись">Save</button>
+            data-toggle="tooltip" data-placement="top" title="Сохранить запись">Save
+    </button>
 </form>
-<form method="post" th:action="@{'/note/delete/' + ${noteById.id}}">
-    <input type="submit" value="Back to List" style="background-color: #cfec14; color: #020202; padding: 10px 20px; border: 1px solid #000; cursor: pointer;"
+<form method="get" th:action="@{'/note/list'}">
+    <input type="submit" value="Back to List"
+           style="background-color: #cfec14; color: #020202; padding: 10px 20px; border: 1px solid #000; cursor: pointer;"
            data-toggle="tooltip" data-placement="top" title="Вернутса назад к списку">
 </form>
 

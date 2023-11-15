@@ -5,6 +5,7 @@
         body {
             background-color: #b0bdaf;
         }
+
         table {
             border-collapse: collapse;
             width: 50%;
@@ -16,6 +17,7 @@
             text-align: left;
             width: 33.33%;
         }
+
         th.actions-column {
             width: 10%;
         }
@@ -44,18 +46,59 @@
             border: 2px solid #000;
             cursor: pointer;
         }
+
+        .container {
+            display: flex;
+            align-items: center;
+            width: 50%;
+        }
+
+        .container div {
+            width: 50%;
+        }
+
+        .right {
+            text-align: right;
+        }
     </style>
 </head>
 <body>
 <h1>List of Notes</h1>
-<form method="post" th:action="@{'/note/create'}" th:object="${note}">
-    <button type="submit"
-            style="background-color: #cfec14; color: #000; padding: 10px 20px; border: 1px solid #000; cursor: pointer; margin-bottom: 10px;"
-            data-toggle="tooltip" data-placement="top" title="Создать новую запись">
-        Create a note
-    </button>
-</form>
+<div class="container">
+    <div class="left">
+        <form method="post" th:action="@{'/note/create'}" th:object="${note}">
+            <button type="submit"
+                    style="background-color: #cfec14; color: #000; padding: 10px 20px; border: 1px solid #000; cursor: pointer; margin-bottom: 10px;"
+                    data-toggle="tooltip" data-placement="top" title="Создать новую запись">
+                Create a note
+            </button>
+        </form>
+    </div>
+    <div class="right">
+        <form id="sort" method="get" th:action="@{'/note/list'}">
+            <input type="submit" value="Сортировать">
+            <select name="sort">
+                <option value="asc">По возрастанию</option>
+                <option value="desc">По убыванию</option>
+            </select>
 
+        </form>
+    </div>
+</div>
+
+<div class="search-container">
+    <form id="search" method="get" th:action="@{'/note/search'}">
+        <div>
+            <label for="searchBy">Search by:</label>
+            <select id="searchBy" name="searchBy">
+                <option value="title">title</option>
+                <option value="content">context</option>
+            </select>
+            <input type="text" id="query" name="query">
+            <input type="submit" value="Search">
+        </div>
+    </form>
+</div>
 <table>
     <tr>
         <th>Title</th>
@@ -70,13 +113,16 @@
             <div class="button-container">
                 <form method="get" action="/note/edit">
                     <button type="submit"
-                            data-toggle="tooltip" data-placement="top" title="Редактировать запись">EDIT</button>
+                            data-toggle="tooltip" data-placement="top" title="Редактировать запись">EDIT
+                    </button>
                     <input type="hidden" name="id" th:value="${note.id}">
                 </form>
                 <form method="post" th:action="@{'/note/delete/' + ${note.id}}">
-                    <input type="hidden" name="_method" value="DELETE" />
-                    <button type="submit" style="background-color: #ba0000; color: #cfec14; padding: 10px 20px; border: 2px solid #000; cursor: pointer;"
-                            data-toggle="tooltip" data-placement="top" title="Удалить запись">DELETE</button>
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <button type="submit"
+                            style="background-color: #ba0000; color: #cfec14; padding: 10px 20px; border: 2px solid #000; cursor: pointer;"
+                            data-toggle="tooltip" data-placement="top" title="Удалить запись">DELETE
+                    </button>
                 </form>
             </div>
         </td>
