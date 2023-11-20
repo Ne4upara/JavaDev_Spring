@@ -49,7 +49,7 @@ public class NoteController {
 
     @PostMapping("/edit")
     public String updateNote(@ModelAttribute Note note) {
-        noteCrudService.save(note);
+        noteCrudService.updatesNote(note);
         return "redirect:/note/list";
     }
 

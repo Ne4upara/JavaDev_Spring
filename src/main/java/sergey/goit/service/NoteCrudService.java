@@ -1,9 +1,14 @@
 package sergey.goit.service;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import sergey.goit.entities.Note;
+import sergey.goit.exception.NotFoundException;
+import sergey.goit.exception.NotSortedException;
 import sergey.goit.repository.NoteRepository;
 import java.util.List;
 
@@ -11,6 +16,7 @@ import java.util.List;
 public class NoteCrudService {
 
     private final NoteRepository noteRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(NoteCrudService.class);
 
     @Autowired
     public NoteCrudService(NoteRepository noteRepository) {
@@ -33,11 +39,19 @@ public class NoteCrudService {
         return noteRepository.findAll();
     }
 
+    public void updatesNote (Note note){
+        save(note);
+    }
+
     public List<Note> allNoteSorted(String sortOrder) {
-        Sort sort = sortOrder.equals("asc") ?
-                Sort.by(Sort.Order.asc("title")) :
-                Sort.by(Sort.Order.desc("title"));
-        return noteRepository.findAll(sort);
+        if(sortOrder.equals("asc")){
+            return noteRepository.findAll(Sort.by(Sort.Order.asc("title")));
+        } else if (sortOrder.equals("desc")) {
+            return noteRepository.findAll(Sort.by(Sort.Order.desc("title")));
+        }else{
+            LOGGER.error("Invalid sorted -> " + sortOrder);
+            throw new NotSortedException("Invalid sorted");
+        }
     }
 
     public List<Note> searchBy(String searchBy, String query) {
@@ -46,6 +60,10 @@ public class NoteCrudService {
         } else if (searchBy.equals("content")) {
             return noteRepository.searchByContent(query);
         }
-        return null;
+        else {
+            LOGGER.error("Invalid search -> " + searchBy);
+            throw new NotFoundException("Invalid search criteria -> " + searchBy);
+
+        }
     }
 }
