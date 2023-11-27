@@ -15,7 +15,7 @@
             border: 1px solid black;
             padding: 8px;
             text-align: left;
-            width: 33.33%;
+            width: 25%;
         }
 
         th.actions-column {
@@ -74,6 +74,13 @@
             </button>
         </form>
     </div>
+    <div class="center">
+        <form method="get" th:action="@{'/logout'}">
+            <input type="submit" value="Back to List"
+                   style="background-color: #cfec14; color: #020202; padding: 10px 20px; border: 1px solid #000; cursor: pointer;"
+                   data-toggle="tooltip" data-placement="top" title="Вернутса назад к списку">
+        </form>
+    </div>
     <div class="right">
         <form id="sort" method="get" th:action="@{'/note/list'}">
             <input type="submit" value="Сортировать">
@@ -101,12 +108,14 @@
 </div>
 <table>
     <tr>
+        <th>User Name</th>
         <th>Title</th>
         <th>Content</th>
         <th class="actions-column">Actions</th>
     </tr>
     <tr th:each="note : ${noteList}">
 
+        <td th:text="${note.userName}"></td>
         <td th:text="${note.title}"></td>
         <td th:text="${note.content}"></td>
         <td>
@@ -126,6 +135,7 @@
                 </form>
             </div>
         </td>
+
     </tr>
 </table>
 </body>

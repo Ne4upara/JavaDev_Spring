@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin List</title>
+    <style>
+        body {
+            background-color: #b0bdaf;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+            width: 25%;
+        }
+
+        th.actions-column {
+            width: 10%;
+        }
+
+        tr:nth-child(even) {
+            background-color: #c5c5c5;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .button-container form {
+            margin: 0;
+        }
+
+        .button-container button {
+            background-color: #008CBA;
+            color: #cfec14;
+            padding: 10px 20px;
+            border: 2px solid #000;
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            width: 50%;
+        }
+
+        .container div {
+            width: 50%;
+        }
+
+        .right {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<h1>Admin List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>User Name</th>
+        <th class="actions-column">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${adminUsernames}">
+        <td th:text="${user.username}"></td>
+        <td>
+            <div class="button-container">
+                <form method="post" th:action="@{'/note/block/' +  ${user.username}}">
+
+                    <button type="submit"
+                            data-toggle="tooltip" data-placement="top" title="block">BLOCK
+                    </button>
+
+                </form>
+                <form method="post" th:action="@{'/note/unblock/' +  ${user.username}}">
+                    <button type="submit"
+                            data-toggle="tooltip" data-placement="top" title="un block">UNBLOCK
+                    </button>
+
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

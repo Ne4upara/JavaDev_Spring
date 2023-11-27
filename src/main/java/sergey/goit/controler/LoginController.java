@@ -6,45 +6,43 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sergey.goit.exception.PasswordNotException;
-import sergey.goit.logic.RegUser;
+
+import sergey.goit.exception.UserAlreadyException;
+import sergey.goit.logic.UserRegistration;
 
 @Controller
 public class LoginController {
 
-    private RegUser regUser;
+    private final UserRegistration userRegistration;
 
-    public LoginController(RegUser regUser) {
-        this.regUser = regUser;
+    public LoginController(UserRegistration userRegistration) {
+        this.userRegistration = userRegistration;
     }
 
-    @GetMapping("/login")
-    public String singIn (Model model){
-        return "test";
-
+    @GetMapping("/note/login")
+    public String singIn() {
+        return "login";
     }
 
-//    @PostMapping("/login")
-//    public String loginOn(){
-//
-//    }
-
-    @GetMapping("/reglogin")
-    public String reglogin(){
-        return "reglogin";
+    @GetMapping("/note/regestre")
+    public String regestre() {
+        return "regestre";
     }
 
-    @PostMapping("/reglogin")
-    public String saveUser(@RequestParam(value = "username", required = false) String username,
-                           @RequestParam (value = "password", required = false) String password,
-                           @RequestParam(value = "passwordtwo", required = false) String passwordtwo) throws PasswordNotException {
-        regUser.registerNewUser(username, password, passwordtwo);
-
-        return "redirect:/login";
+    @PostMapping("/note/regestre")
+    public String saveNewUser(Model model,
+                              @RequestParam(value = "username", required = false) String username,
+                              @RequestParam(value = "password", required = false) String password,
+                              @RequestParam(value = "confirmPassword", required = false) String confirmPassword) {
+        try {
+            userRegistration.registerNewUser(username, password, confirmPassword);
+            return "redirect:/login";
+        } catch (PasswordNotException e) {
+            model.addAttribute("error", e.getMessage());
+            return "regestre";
+        } catch (UserAlreadyException e) {
+            model.addAttribute("error", e.getMessage());
+            return "regestre";
+        }
     }
-
-
-
-
 }
-
-

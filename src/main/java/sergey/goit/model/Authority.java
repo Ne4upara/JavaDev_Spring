@@ -18,6 +18,14 @@ public class Authority {
     @Column(name = "authority", nullable = false, length = 50)
     private String authority;
 
+    public Authority(User user, String authority) {
+        this.user = user;
+        this.authority = authority;
+    }
+
+    public Authority() {
+    }
+
     public Long getId() {
         return id;
     }

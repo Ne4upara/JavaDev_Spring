@@ -9,11 +9,11 @@ import sergey.goit.model.Note;
 import java.util.List;
 
 @Repository
-public interface NoteRepository extends JpaRepository <Note, Long>  {
+public interface NoteRepository extends JpaRepository<Note, Long> {
 
     @Query("FROM Note n WHERE n.title LIKE %:title%")
     List<Note> searchByTitle(@Param("title") String title);
 
     @Query("FROM Note n WHERE n.content LIKE %:content%")
-    List<Note> searchByContent(@Param("content")String content);
+    List<Note> searchByContent(@Param("content") String content);
 }

@@ -1,3 +1,0 @@
-$2a$10$iKeasQSKNW67KFOyJqKhL.HJfZrvFpRZnf6YxAlFoqcXkdBdeezbS
-admin
-ROLE_ADMIN

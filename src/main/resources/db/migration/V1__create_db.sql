@@ -1,9 +1,10 @@
 create table note
 (
-    id      bigint not null
+    id       bigint not null
         primary key,
-    content varchar(255),
-    title   varchar(255)
+    username varchar(60),
+    content  varchar(255),
+    title    varchar(255)
 );
 
 alter table note

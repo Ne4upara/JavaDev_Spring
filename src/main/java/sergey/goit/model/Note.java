@@ -12,6 +12,9 @@ public class Note {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "username")
+    private String userName;
+
     @Column(name = "title")
     private String title;
 
@@ -42,12 +45,11 @@ public class Note {
         this.content = content;
     }
 
-    @Override
-    public String toString() {
-        return "Note{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                '}';
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

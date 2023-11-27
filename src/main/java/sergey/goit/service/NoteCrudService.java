@@ -10,6 +10,7 @@ import sergey.goit.model.Note;
 import sergey.goit.exception.NotFoundException;
 import sergey.goit.exception.NotSortedException;
 import sergey.goit.repository.NoteRepository;
+
 import java.util.List;
 
 @Service
@@ -39,16 +40,16 @@ public class NoteCrudService {
         return noteRepository.findAll();
     }
 
-    public void updatesNote (Note note){
+    public void updatesNote(Note note) {
         save(note);
     }
 
     public List<Note> allNoteSorted(String sortOrder) {
-        if(sortOrder.equals("asc")){
+        if (sortOrder.equals("asc")) {
             return noteRepository.findAll(Sort.by(Sort.Order.asc("title")));
         } else if (sortOrder.equals("desc")) {
             return noteRepository.findAll(Sort.by(Sort.Order.desc("title")));
-        }else{
+        } else {
             LOGGER.error("Invalid sorted -> " + sortOrder);
             throw new NotSortedException("Invalid sorted");
         }
@@ -59,8 +60,7 @@ public class NoteCrudService {
             return noteRepository.searchByTitle(query);
         } else if (searchBy.equals("content")) {
             return noteRepository.searchByContent(query);
-        }
-        else {
+        } else {
             LOGGER.error("Invalid search -> " + searchBy);
             throw new NotFoundException("Invalid search criteria -> " + searchBy);
 
