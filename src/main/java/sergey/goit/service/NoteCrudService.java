@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import sergey.goit.entities.Note;
+import sergey.goit.model.Note;
 import sergey.goit.exception.NotFoundException;
 import sergey.goit.exception.NotSortedException;
 import sergey.goit.repository.NoteRepository;

@@ -1,4 +1,4 @@
-package sergey.goit.entities;
+package sergey.goit.model;
 
 import jakarta.persistence.*;
 

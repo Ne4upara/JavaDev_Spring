@@ -5,6 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import sergey.goit.model.User;
+import sergey.goit.repository.UserRepository;
 
 @SpringBootApplication
 public class GoitApplication {
@@ -14,7 +16,10 @@ public class GoitApplication {
     }
 
     @Bean
-    public CommandLineRunner runFlyway(Flyway flyway) {
-        return args -> flyway.migrate();
+    public CommandLineRunner runFlyway(Flyway flyway, UserRepository users) {
+        return args -> {
+            flyway.migrate();
+//            users.save(new User("admin", "admin", "ADMIN"));
+        };
     }
 }

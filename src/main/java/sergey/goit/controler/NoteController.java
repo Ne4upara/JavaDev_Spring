@@ -1,10 +1,13 @@
-package sergey.goit.controlers;
+package sergey.goit.controler;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import sergey.goit.entities.Note;
+import sergey.goit.model.Note;
 
 import sergey.goit.service.NoteCrudService;
 
@@ -31,6 +34,7 @@ public class NoteController {
         return "list";
     }
 
+//    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete/{id}")
     public String deleteByid(@PathVariable Long id) {
         Note noteById = noteCrudService.getNoteById(id);
@@ -38,8 +42,9 @@ public class NoteController {
         return "redirect:/note/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/edit")
-    public String editNoteById(Model model, @RequestParam(value = "id") Long id) {
+    public String editNoteById(Model model, @RequestParam(value = "id") Long id, Authentication authentication) {
         Note noteById = noteCrudService.getNoteById(id);
         noteCrudService.save(noteById);
         model.addAttribute("noteById", noteById);
@@ -47,14 +52,16 @@ public class NoteController {
         return "edit";
     }
 
+    @PostAuthorize("hasRole('ADMIN')")
     @PostMapping("/edit")
     public String updateNote(@ModelAttribute Note note) {
         noteCrudService.updatesNote(note);
         return "redirect:/note/list";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
-    public String createNote(Model model) {
+    public String createNote(Model model, Authentication authentication) {
         Note newNote = new Note();
         model.addAttribute("noteById", newNote);
         model.addAttribute("titleMesage", "Create Note");
