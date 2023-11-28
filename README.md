@@ -8,10 +8,10 @@ Authorization and registration page.
 ![изображение](https://github.com/Ne4upara/JavaDev_Spring/assets/127094971/327e4ca2-0a0b-4533-8cf6-b409fae44046)
 
 There is a search by titles and context. 
-![изображение](https://github.com/Ne4upara/JavaDev_Spring/assets/127094971/0ef816ed-2729-472b-b1e5-cb69b0c285c2)
+![изображение](https://github.com/Ne4upara/JavaDev_Spring/assets/127094971/4038e148-544d-4d8d-9d9f-ffc49fc4ad27)
 
 There is sorting by increasing or decreasing titles. 
-![изображение](https://github.com/Ne4upara/JavaDev_Spring/assets/127094971/6b840f77-7874-4d07-84fb-393870bea1bc)
+![изображение](https://github.com/Ne4upara/JavaDev_Spring/assets/127094971/51ceca24-2026-4b02-826a-d7b83f6bcd4d)
 
 Create a new note.
 ![изображение](https://github.com/Ne4upara/JavaDev_Spring/assets/127094971/83e106b0-09cf-4d5b-96ac-e49b45009d19)
