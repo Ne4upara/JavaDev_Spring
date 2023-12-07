@@ -21,23 +21,29 @@ public class NoteService {
     private final int MAX_TITLE_LENGTH = 100;
     private final int MAX_CONTENT_LENGTH = 500;
     private Sort sort;
+    private List<Note> userNotes;
 
     public NoteService(NoteRepository noteRepository) {
         this.noteRepository = noteRepository;
     }
 
     public GetAllNoteResponse getAllNotes(String sortBy, String sortOrder) {
-        Optional<GetAllNoteResponse.Error> sortError = validateSorted(sortBy, sortOrder);
-        if (sortError.isPresent()) {
-            return GetAllNoteResponse.failed(sortError.get());
+        if (sortBy != null || sortOrder != null) {
+            Optional<GetAllNoteResponse.Error> sortError = validateSorted(sortBy, sortOrder);
+
+            if (sortError.isPresent()) {
+                return GetAllNoteResponse.failed(sortError.get());
+            }
+
+            switch (sortOrder) {
+                case "asc" -> sort = Sort.by(Sort.Order.asc(sortBy));
+                case "desc" -> sort = Sort.by(Sort.Order.desc(sortBy));
+            }
+            userNotes = noteRepository.findAll(sort);
+        } else {
+            userNotes = noteRepository.findAll();
         }
 
-        if ("asc".equalsIgnoreCase(sortOrder)) {
-            sort = Sort.by(Sort.Order.asc(sortBy));
-        } else if ("desc".equalsIgnoreCase(sortOrder)) {
-            sort = Sort.by(Sort.Order.desc(sortBy));
-        }
-        List<Note> userNotes = noteRepository.findAll(sort);
         return GetAllNoteResponse.success(userNotes);
     }
 
@@ -101,11 +107,9 @@ public class NoteService {
     }
 
     private Optional<GetAllNoteResponse.Error> validateSorted(String sortBy, String sortOrder) {
-
         if (sortBy == null || sortOrder == null) {
             return Optional.of(GetAllNoteResponse.Error.NOT_TWO_OPERATORS);
         }
-
         if (!sortBy.equals("title") && !sortBy.equals("content")) {
             return Optional.of(GetAllNoteResponse.Error.INVALID_SORT_BY);
         }

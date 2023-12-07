@@ -21,6 +21,14 @@ public class GetAllNoteResponse {
         this.userNotes = userNotes;
     }
 
+    public List<Note> getUserNotes() {
+        return userNotes;
+    }
+
+    public void setUserNotes(List<Note> userNotes) {
+        this.userNotes = userNotes;
+    }
+
     public Error getError() {
         return error;
     }
@@ -37,4 +45,3 @@ public class GetAllNoteResponse {
         return new GetAllNoteResponse(error, null);
     }
 }
-
