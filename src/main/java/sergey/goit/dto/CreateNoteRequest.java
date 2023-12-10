@@ -2,6 +2,7 @@ package sergey.goit.dto;
 
 public class CreateNoteRequest {
 
+
     private String title;
     private String content;
 
