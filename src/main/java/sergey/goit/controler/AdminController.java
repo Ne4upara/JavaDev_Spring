@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/note")
 public class AdminController {
-
     private final AuthorityRepository authorityRepository;
 
     private final UserRepository userRepository;
