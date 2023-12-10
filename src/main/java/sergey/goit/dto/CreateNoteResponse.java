@@ -29,6 +29,4 @@ public class CreateNoteResponse {
     public static CreateNoteResponse failed(Error error) {
         return new CreateNoteResponse(error);
     }
-
-
 }
