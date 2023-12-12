@@ -11,8 +11,21 @@
     build:
       runs-on: ubuntu-latest
 
+      services:
+
+        my-database:
+          image: my-database-image
+          ports:
+            - 5432:5432
+
       steps:
-        - uses: actions/checkout@v2
+        - name: Checkout repository
+          uses: actions/checkout@v2
+
+        - name: Set up Docker
+          uses: docker/setup-docker@v2
+          with:
+            dockerfile: Dockerfile
 
         - name: Set up JDK 20
           uses: actions/setup-java@v2
@@ -22,3 +35,4 @@
 
         - name: Build and test with Maven
           run: mvn clean install
+
