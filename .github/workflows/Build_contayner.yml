@@ -37,8 +37,6 @@ jobs:
 
       - name: Your Additional Steps
         run: |
-          # Add any additional steps you need here
-          # For example, running tests, deploying, etc.
-
+          
       - name: Stop and Remove the Docker container
         run: docker stop your-container-name && docker rm your-container-name
