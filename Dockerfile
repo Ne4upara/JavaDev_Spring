@@ -3,8 +3,7 @@ ENV POSTGRES_USER admin
 ENV POSTGRES_PASSWORD admin
 ENV POSTGRES_DB java
 
-WORKDIR /goit
-COPY --from=build /app/out .
+
 
 
 
