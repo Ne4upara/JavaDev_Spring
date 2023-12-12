@@ -14,7 +14,7 @@
       services:
 
         my-database:
-          image: my-database-image
+          image: database-image
           ports:
             - 5432:5432
 
@@ -26,6 +26,13 @@
           uses: docker/setup-docker@v2
           with:
             dockerfile: Dockerfile
+
+        - name: Build and Push Docker Image
+          run: |
+             echo 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 | docker login ghcr.io -u Ne4upara --password-stdin
+             docker build -t ghcr.io/pg/javadespring:v1 .
+             docker push ghcr.io/pg/javadespring:v1
+
 
         - name: Set up JDK 20
           uses: actions/setup-java@v2
