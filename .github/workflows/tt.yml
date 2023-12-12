@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DATABASE_URL: jdbc:postgresql://localhost:5432/yourdatabase
+      DATABASE_URL: jdbc:postgresql://localhost:5432/postgres
       DATABASE_USERNAME: yourusername
       DATABASE_PASSWORD: yourpassword
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
