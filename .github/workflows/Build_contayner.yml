@@ -1,7 +1,10 @@
-name: Your Workflow Name
+name: Create container
 
 on:
   push:
+    branches:
+      - master
+  pull_request:
     branches:
       - master
 
