@@ -11,8 +11,8 @@ jobs:
 
     env:
       DATABASE_URL: jdbc:postgresql://localhost:5432/postgres
-      DATABASE_USERNAME: yourusername
-      DATABASE_PASSWORD: yourpassword
+      DATABASE_USERNAME: admin
+      DATABASE_PASSWORD: admin
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
 
     services:
