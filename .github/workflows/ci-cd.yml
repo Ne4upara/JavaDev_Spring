@@ -14,7 +14,7 @@
       services:
 
         my-database:
-          image: database-image
+          image: postgres:latest
           ports:
             - 5432:5432
 
@@ -24,9 +24,7 @@
 
         - name: Set up Docker
           uses: docker/setup-docker@v2
-          with:
-            dockerfile: Dockerfile
-
+         
         - name: Build and Push Docker Image
           run: |
              echo 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 | docker login ghcr.io -u Ne4upara --password-stdin
