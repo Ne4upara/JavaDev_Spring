@@ -3,17 +3,28 @@ name: Spring Boot CI with Hibernate
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     env:
-      DATABASE_URL: jdbc:h2:mem:testdb
-      SPRING_DATASOURCE_USERNAME: sa
-      SPRING_DATASOURCE_PASSWORD: password
+      DATABASE_URL: jdbc:postgresql://localhost:5432/yourdatabase
+      DATABASE_USERNAME: yourusername
+      DATABASE_PASSWORD: yourpassword
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: yourdatabase
+          POSTGRES_USER: yourusername
+          POSTGRES_PASSWORD: yourpassword
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
     - name: Checkout repository
@@ -27,26 +38,5 @@ jobs:
     - name: Build with Maven
       run: mvn -B clean install
 
-    - name: Run Spring Boot application
-      run: mvn spring-boot:run &
-
-    - name: Wait for application to start
-      run: |
-        timeout=300
-        while [[ ! "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080)" == "200" ]]; do
-          sleep 5
-          timeout=$((timeout-5))
-          if [ "$timeout" -le 0 ]; then
-            echo "Application failed to start. Exiting..."
-            exit 1
-          fi
-        done
-
     - name: Run Hibernate tests
       run: mvn test
-
-    - name: Stop Spring Boot application
-      run: pkill -f "java -jar"
-
-    - name: Cleanup
-      run: mvn clean
