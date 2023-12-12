@@ -33,18 +33,12 @@ jobs:
           ${IMAGE_NAME}
 
     - name: Your Additional Steps
-      run: |
+      run: mvn -B package --file pom.xml
+      
         # Add any additional steps you need here
         # For example, running tests, deploying, etc.
 
-        - name: Stop and Remove the Docker container
-          run: docker stop your-container-name && docker rm your-container-namesteps:
-        - uses: actions/checkout@v3
-        - name: Set up JDK 17
-            uses: actions/setup-java@v3
-            with:
-              java-version: '17'
-              distribution: 'temurin'
-              cache: maven
-        - name: Build with Maven
-          run: mvn -B package --file pom.xml
+    
+    
+    - name: Stop and Remove the Docker container
+      run: docker stop your-container-name && docker rm your-container-namesteps:
