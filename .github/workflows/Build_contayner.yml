@@ -53,5 +53,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ne4upara
-          labels: ne4upara
+          tags: ne4upara/ne4upara:tag
