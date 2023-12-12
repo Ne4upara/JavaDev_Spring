@@ -2,8 +2,9 @@ name: Spring Boot CI with Hibernate
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
