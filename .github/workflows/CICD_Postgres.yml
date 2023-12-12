@@ -11,8 +11,8 @@ jobs:
 
     env:
       DATABASE_URL: jdbc:postgresql://localhost:5432/postgres
-      DATABASE_USERNAME: ${{ secrets.DB_USER }}
-      DATABASE_PASSWORD: ${{ secrets.DB_PASWORD }}
+      DATABASE_USERNAME: admin
+      DATABASE_PASSWORD: admin
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
 
     services:
@@ -20,8 +20,8 @@ jobs:
         image: postgres:latest
         env:
           POSTGRES_DB: java
-          POSTGRES_USER: ${{ secrets.DB_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.DB_PASWORD }}
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
