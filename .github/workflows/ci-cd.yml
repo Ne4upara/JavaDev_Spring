@@ -30,7 +30,7 @@
             
         - name: Build and Push Docker Image           
           run: |
-            echo "${{ secrets.DOCKER_TOKEN }}" | docker login ghcr.io -u ne4upara --password-stdin
+            docker login ghcr.io -u ne4upara -p "${{ secrets.DOCKER_TOKEN }}"
             docker build -t ghcr.io/pg/javadespring:v1 .
             docker push ghcr.io/pg/javadespring:v1          
 
